@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title> </title>
+</head>
+<body>
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 申请结果 <span class="c-gray en"></span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+<!--        <div class="text-c">-->
+<!--            <form action="{:url('Result/index')}" method="post" class="form form-horizontal" id="form-admin-add">-->
+<!--                <input type="text" class="input-text" style="width:250px" placeholder="输入项目名称"  name="select_project">-->
+<!--                <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">&#xe665;</i> </button>-->
+<!--            </form>-->
+<!--        </div>-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <a href="{:url('Result/index')}?TrueFalse=0">
+                    <span class="l">
+                        <span class="btn btn-primary-outline radius">查看未通过</span>
+                    </span>
+                </a>
+                <a href="{:url('Result/index')}?TrueFalse=1">
+                    <span class="r">
+                        <span class="btn btn-primary-outline radius">查看全部</span>
+                    </span>
+                </a>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">共有<strong><font size="12px" color="red">{$total}</font></strong>条退回</span> </div>
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th >项目名称</th>
+            <th >是否通过</th>
+
+            <th >提交时间</th>
+            <th >通过时间</th>
+            <th >操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {volist name="list" id="vo" }
+        <tr class="text-c">
+
+            <th >{$vo.project_name}</th>
+            <td>
+                {switch name="$vo.agree"}
+                {case value="0"}未审核{/case}
+                {case value="1"}通过{/case}
+                {case value="2"}退回{/case}
+                {default /}default
+                {/switch}
+            </td>
+            <th >{$vo.time|date="Y-m-d",###}</th>
+            <th >{$vo.tc_data|date="Y-m-d",###}</th>
+            <td class="f-14">
+
+                {switch name="$vo.agree"}
+                {case value="2"}<span class="btn btn-primary-outline radius"  onclick="see('项目详情','{$vo.id}','2','800','500')" >详情&重申</span>{/case}
+                {default /}------
+                {/switch}
+          </td>
+
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+
+</div>
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="l">
+        <a href="{:url('result/index')}?page={$current_page-1}&TrueFalse={$tf}"  class="btn btn-primary radius">
+        <i class="Hui-iconfont">&#xe6db;</i> 上一页</a>
+    </span>
+    <span ><center> 当前{$current_page}页 /总{$last_page}页面</center></span>
+    <span class="r"> <a href="{:url('result/index')}?page={$current_page+1}&TrueFalse={$tf}"  class="btn btn-primary radius">
+       下一页  <i class="Hui-iconfont">&#xe6e3;</i> </a></span> </div>
+<script>
+
+    function see(title,url,id,w,h){
+        layer_show(title,"{:url('result/updatain')}?id="+url,w,h);
+    }
+
+
+
+</script>
+    {include file="publicFile/foot" /}

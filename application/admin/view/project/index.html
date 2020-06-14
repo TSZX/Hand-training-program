@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>H-ui.admin v3.1</title>
+</head>
+<body>
+
+
+
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 项目管理 <span class="c-gray en">&gt;</span> 项目管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c">
+        <form action="{:url('project/index')}" method="post" class="form form-horizontal" id="form-admin-add">
+        <input type="text" class="input-text" style="width:250px" placeholder="输入项目名称"  name="select_project">
+        <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">&#xe665;</i> </button>
+        </form>
+            </div>
+            <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_add('添加项目','add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加项目</a></span> <span class="r">共有数据：<strong>{$total}</strong> 条</span> </div>
+        <table class="table table-border table-bordered table-bg">
+
+
+            <thead>
+            <tr>
+                <th scope="col" colspan="9">项目列表</th>
+            </tr>
+            <tr class="text-c">
+
+                <th >id</th>
+                <th >项目名称</th>
+                <th >项目分数</th>
+                <th >项目类别</th>
+                <th>是否必修</th>
+                <th >所在时间</th>
+
+                <th >操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="list" id="vo" }
+            <tr class="text-c">
+
+                <td>{$vo.project_id}</td>
+                <td>{$vo.project}</td>
+                <td>{$vo.fraction}</td>
+                <td>{$vo.proiject_class}</td>
+
+                <td >{if condition="($vo.obligatory == 1) "} 必修
+                    {else /}选修
+                    {/if}
+                </td>
+                <td>{$vo.semester}</td>
+
+                <td class="td-manage">
+                    <a title="编辑" href="javascript:;" onclick="admin_updata('项目编辑','updata.html?id={$vo.project_id}','1','800','500')" class="ml-5" style="text-decoration:none">
+                        <i class="Hui-iconfont">&#xe6df;</i>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="admin_del(this,{$vo.project_id})" class="ml-5" style="text-decoration:none">
+                        <i class="Hui-iconfont">&#xe6e2;</i>
+                    </a>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="l">
+        <a href="{:url('project/index')}?page={$current_page-1}{$select_page}"  class="btn btn-primary radius">
+        <i class="Hui-iconfont">&#xe6db;</i> 上一页</a>
+    </span>
+    <span ><center> 当前{$current_page}页 /总{$last_page}页面</center></span>
+    <span class="r"> <a href="{:url('project/index')}?page={$current_page+1}{$select_page}"  class="btn btn-primary radius">
+       下一页  <i class="Hui-iconfont">&#xe6e3;</i> </a></span> </div>
+<script>
+
+    function admin_add(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+
+    function admin_updata(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    }
+
+    function admin_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            var res = '';
+            var url = "{:url('Project/deleteData')}?id="+id;
+            $.ajax({
+                url:  url,
+                data: res,
+                type: 'get',
+                success:function(data){
+                    if (data.code == 0) {
+                        layer.alert(data.msg,{icon:6},function (index) {
+                            layer.close(index);
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!',{icon:1,time:1000});
+                        });
+                    } else{
+                        layer.alert(data.msg,{icon:5},function (index) {
+                            layer.close(index);
+
+                        });
+                    }
+                }
+            });
+
+        });
+    }
+
+</script>
+    {include file="publicAdmin/foot" /}

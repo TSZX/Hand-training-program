@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>H-ui.admin v3.1</title>
+</head>
+<body>
+
+
+
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 项目管理 <span class="c-gray en">&gt;</span> 项目管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+
+    <div class="text-c">
+         <span>
+             <a href="{:url('project/oldSemester')}"  class="btn btn-primary radius">
+                学期总分
+             </a>
+         </span>
+    </div>
+
+
+    <div class="text-c">
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+    <div class="text-c" style="border: 2px  dashed   #0f9ae0">
+        <p>
+            &nbsp;
+        </p>
+        <form action="{:url('project/newSemester')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+            <label>请导入新学期项目 并为新学期命名<br>
+                <input type="text" class="input-text" style="width:250px" placeholder="请输入新学期名字"  name="name">
+                <br>
+                <input type="file" name="file">
+            </label>
+            <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">导入</i> </button>
+        </form>
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+    <div class="text-c">
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+
+    <div class="text-c" style="border: 2px  dashed   #0f9ae0">
+        <p>
+            &nbsp;
+        </p>
+        <form action="{:url('project/studentin')}"   method="post" class="form form-horizontal"  enctype="multipart/form-data">
+            <label>请导入新学生表 没有新学生可以忽略<br>
+                <input type="file" name="file"><br>
+            </label>
+            <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">导入</i> </button>
+        </form>
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+    <div class="text-c">
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+
+    <div class="text-c"  style="border: 2px  dashed   #0f9ae0" >
+        <p>
+            &nbsp;
+        </p>
+        <form action="{:url('project/classin')}"  method="post" class="form form-horizontal"  enctype="multipart/form-data">
+            <label>请导入新班级表 没有新班级可以忽略<br>
+
+                <input type="file" name="file"><br>
+            </label>
+            <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">导入</i> </button>
+        </form>
+        <p>
+            &nbsp;
+        </p>
+    </div>
+    <div class="text-c"  style="border: 2px  dashed   #0f9ae0" >
+        <p>
+            &nbsp;
+        </p>
+        <form action="{:url('project/studentupdata')}"  method="post" class="form form-horizontal"  enctype="multipart/form-data">
+            <label>请导入转班学生表<br>
+
+                <input type="file" name="file"><br>
+            </label>
+            <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">导入</i> </button>
+        </form>
+        <p>
+            &nbsp;
+        </p>
+    </div>
+
+
+</div>
+
+{include file="publicAdmin/foot" /}

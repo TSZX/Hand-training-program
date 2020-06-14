@@ -1,0 +1,52 @@
+<aside class="Hui-aside">
+    <div class="menu_dropdown bk_2">
+
+        <dl >
+            <dt><i class="Hui-iconfont">&#xe616;</i> 审核管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('cat/index')}" data-title="查看审核" >查看审核</a></li>
+                    <li><a data-href="{:url('cat/begin')}" data-title="进行审核" >进行审核</a></li>
+                    <li><a data-href="{:url('cat/fraction')}" data-title="得分统计" >得分统计</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl >
+            <dt><i class="Hui-iconfont">&#xe616;</i> 班级管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="{:url('Class_management/index')}" data-title="班级管理" >班级管理</a></li>
+                    {if condition="($role < 4 ) "}
+                    {else /}<li><a data-href="{:url('college/index')}" data-title="学院管理" >学院管理</a></li>
+                    {/if}
+                </ul>
+            </dd>
+        </dl>
+        <dl >
+            <dt><i class="Hui-iconfont">&#xe616;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    {if condition="($role < 4 ) "}
+                    {else /}  <li><a data-href="{:url('users/index')}" data-title="用户管理" >用户管理</a></li>
+                    {/if}
+
+                </ul>
+            </dd>
+        </dl>
+
+        {if condition="($role <= 3 ) "}
+        {else /}
+        <dl>
+        <dt><i class="Hui-iconfont">&#xe616;</i> 项目管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+        <dd>
+            <ul>
+                <li><a data-href="{:url('project/index')}" data-title="项目管理" >项目管理</a></li>
+                <li><a data-href="{:url('project/setting_time')}" data-title="更改学期" >更改学期</a></li>
+            </ul>
+        </dd>
+        </dl>
+        {/if}
+
+
+    </div>
+</aside>

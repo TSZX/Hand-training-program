@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title> </title>
+</head>
+<body>
+<div class="page-container">
+
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong>{$total}</strong> 条</span> </div>
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+        <tr>
+            <th scope="col" colspan="9">学生列表</th>
+        </tr>
+        <tr class="text-c">
+            <th >学号</th>
+            <th  >姓名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="list" id="vo" }
+        <tr class="text-c">
+
+            <td>{$vo.student_id}</td>
+            <td>{$vo.student_name}</td>
+            <td class="td-manage">
+                <a title="删除" href="javascript:;" id="del" onclick="admin_del(this,{$vo.student_id})" class="ml-5" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe6e2;</i>
+                </a>
+            </td>
+
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="l">
+        <a href="{:url('classManagement/cat')}?page={$current_page-1}&id={$id}"  class="btn btn-primary radius">
+        <i class="Hui-iconfont">&#xe6db;</i> 上一页</a>
+    </span>
+    <span ><center> 当前{$current_page}页 /总{$last_page}页面</center></span>
+    <span class="r"> <a href="{:url('classManagement/cat')}?page={$current_page+1}&id={$id}"  class="btn btn-primary radius">
+       下一页  <i class="Hui-iconfont">&#xe6e3;</i> </a></span> </div>
+
+
+<script>
+    function admin_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            //此处请求后台程序，下方是成功后的前台处理……
+
+            var res = '';
+            var url = "{:url('classManagement/deleteStudent')}?id="+id;
+            $.ajax({
+                url:  url,
+                data: res,
+                type: 'get',
+                success:function(data){
+                    if (data.code == 0) {
+                        layer.alert(data.msg,{icon:6},function (index) {
+                            layer.close(index);
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!',{icon:1,time:1000});
+                        });
+                    } else{
+                        layer.alert(data.msg,{icon:5},function (index) {
+                            layer.close(index);
+
+                        });
+                    }
+                }
+            });
+
+        });
+    }
+</script>
+
+{include file="publicAdmin/foot" /}

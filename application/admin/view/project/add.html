@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>H-ui.admin v3.1</title>
+</head>
+<body>
+<article class="cl pd-20">
+    <form action="{:url('project/insetproject')}" method="post" class="form form-horizontal" id="form-admin-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" name="name" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目分数：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" autocomplete="off" value=""  name="fraction" >
+            </div>
+        </div>
+<!--        <div class="row cl">-->
+<!--            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否必修：</label>-->
+<!--            <div class="formControls col-xs-8 col-sm-9 skin-minimal">-->
+<!--                <div class="radio-box">-->
+<!--                    <input name="obligatory" type="radio" id="sex-1" checked>-->
+<!--                    <label for="sex-1">是</label>-->
+<!--                </div>-->
+<!--                <div class="radio-box">-->
+<!--                    <input type="radio" id="sex-2" name="obligatory">-->
+<!--                    <label for="sex-2">否</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否必修</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="obligatory" size="1">
+					<option value="1 ">必修</option>
+                    <option value="0 ">选修</option>
+
+                </select>
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">分类</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="project_class" size="1">
+					<option value="理想信念 ">理想信念 </option>
+                    <option value="身心健康 ">身心健康 </option>
+                    <option value="学习能力 ">学习能力 </option>
+                    <option value="人文艺术 ">人文艺术 </option>
+                    <option value="法纪意识 ">法纪意识 </option>
+                    <option value="社会能力 ">社会能力 </option>
+                    <option value="职业素养 ">职业素养 </option>
+                </select>
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">项目介绍：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="text_project" cols="" rows="" class="textarea"  placeholder="最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+{include file="publicAdmin/foot" /}

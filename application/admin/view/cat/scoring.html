@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/public/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/public/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/public/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/public/admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>H-ui.admin v3.1</title>
+</head>
+<body>
+
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 项目申请 <span class="c-gray en"></span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c">
+        <form action="{:url('cat/fraction')}" method="post" class="form form-horizontal" id="form-admin-add">
+
+            <select class="select" style="width: 300px" name="com" size="1">
+                {foreach name='semlist' item='vo'}
+                <option value="{$vo.Current_semester}">{$vo.Current_semester}</option>
+                {/foreach}
+            </select>
+            <select class="select" style="width: 300px" name="Professional_grade" size="1">
+                {foreach name='class' item='vo'}
+                <option value="{$vo.Professional_grade}">{$vo.Professional_grade}</option>
+                {/foreach}
+            </select>
+            <button type="submit" class="btn btn-success" name="submit_test"><i class="Hui-iconfont">&#xe665;</i> </button>
+        </form>
+    </div>
+
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th >年级排名</th>
+            <th >姓名</th>
+            <th >班级</th>
+            <th >选修</th>
+            <th >必修</th>
+            <th >总分</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {php}$a = ($current_page-1)*20+1 ;{/php}
+
+        {volist name="list" id="vo" }
+        <tr class="text-c">
+            <td> {php}echo $a;
+                $a++;
+                if(empty($vo["score"])){
+                $vo["score"]="-----";
+                }
+                {/php}
+            </td>
+            <td>{$vo.student_name}</td>
+            <td>{$vo.class_name}</td>
+            <td>{$vo.compulsory_score}</td>
+            <td>{$vo.Elective_score}</td>
+            <td>{$vo.score}</td>
+
+
+
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+</div>
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="l">
+        <a href="{:url('cat/fraction')}?page={$current_page-1}&com={$com_view}&Professional_grade={$Professional_grade}"  class="btn btn-primary radius">
+        <i class="Hui-iconfont">&#xe6db;</i> 上一页</a>
+    </span>
+    <span ><center> 当前{$current_page}页 /总{$last_page}页面</center></span>
+    <span class="r"> <a href="{:url('cat/fraction')}?page={$current_page+1}&com={$com_view}&Professional_grade={$Professional_grade}"  class="btn btn-primary radius">
+       下一页  <i class="Hui-iconfont">&#xe6e3;</i> </a></span> </div>
+<script>
+
+</script>
+{include file="publicAdmin/foot" /}
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/public/admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/public/admin/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/public/admin/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script>
+    function myselfinfo(){
+        layer_show('修改密码','{:url("user/index")}','800','500');
+    }
+
+</script>
+
+<script>
+    $(function(){
+        $("form").submit(function (e) {
+            var res = $(this).serialize();
+            var url = $(this).attr("action");
+            $.ajax({
+                url: url,
+                data: res,
+                type: 'post',
+                success: function (data) {
+                    if (data.code == 1) {
+                        layer.alert(data.msg, {icon: 6}, function (index) {
+                            layer.close(index);
+
+                        });
+                    } else {
+                        layer.alert(data.msg, {icon: 5}, function (index) {
+                            layer.close(index);
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+            return false; // 阻止表单跳转
+        });
+    });
+</script>
